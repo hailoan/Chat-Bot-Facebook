@@ -38,7 +38,16 @@
               {
                 sendMessage(senderId, "Mimi Shop: " + 'Xin Chào');
               }
-              else{sendMessage(senderId, "Mimi Shop: " + "Xin lỗi, câu hỏi của bạn chưa có trong hệ thống, chúng tôi sẽ cập nhật sớm nhất.");}
+               else if(text=='help')
+               {
+                   sendMessage(senderId, "Bạn vui lòng liên hệ theo số điện thoại để được giải đáp thắc mắc 1 cách nhanh nhất.\n 0356202498");
+               }
+               else if(text=='info'){
+                   sendMessage(senderId,"Mini Shop chuyên bán phụ kiện làm quà tặng.\n Địa chỉ: số 105, 79 Cầu Giấy, Hà Nội.");
+               }
+               else if(text=='menu'){
+                    sendMessage(senderId,"Các mặt hàng đang bán của Mimi Shop: Móc khóa lọ nước nhiều hình");
+               }
             }
           }
         }
