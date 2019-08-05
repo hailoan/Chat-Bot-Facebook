@@ -34,18 +34,18 @@
             // Nếu người dùng gửi tin nhắn đến
             if (message.message.text) {
               var text = message.message.text;
-              if(text == 'hi' || text == "hello")
+              if(text == "hello")
               {
                 sendMessage(senderId, "Mimi Shop: " + 'Xin Chào');
               }
-               else if(text=='help'|| text == 'Help')
+               else if(text=='help')
                {
                    sendMessage(senderId, "Bạn vui lòng liên hệ theo số điện thoại để được giải đáp thắc mắc 1 cách nhanh nhất.\n 0356202498");
                }
-               else if(text=='info' || text == 'Info'){
+               else if(text=='info'){
                    sendMessage(senderId,"Mini Shop chuyên bán phụ kiện làm quà tặng.\n Địa chỉ: số 105, 79 Cầu Giấy, Hà Nội.");
                }
-               else if(text=='menu'|| text=='Menu'){
+               else {
                     sendMessage(senderId,"Các mặt hàng đang bán của Mimi Shop: Móc khóa lọ nước nhiều hình");
                }
             }
