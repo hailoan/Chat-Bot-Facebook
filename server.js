@@ -38,19 +38,12 @@ app.post('/webhook', function (req, res) {
       if (message.message) {
         // Nếu người dùng gửi tin nhắn đến
         if (message.message.text) {
-          var text = message.message.text;
-          if (text == "hello") {
-            sendMessage(senderId, "Mimi Shop: " + 'Xin Chào');
-          }
-          else if (text == 'help') {
-            sendMessage(senderId, "Bạn vui lòng liên hệ theo số điện thoại để được giải đáp thắc mắc 1 cách nhanh nhất.\n 0356202498");
-          }
-          else if (text == 'info') {
-            sendMessage(senderId, "Mini Shop chuyên bán phụ kiện làm quà tặng.\n Địa chỉ: số 105, 79 Cầu Giấy, Hà Nội.");
-          }
-          else {
-            sendMessage(senderId, "Các mặt hàng đang bán của Mimi Shop: Móc khóa lọ nước nhiều hình");
-          }
+        }
+      }
+      else {
+        if (message.postback && message.postback.payload === "GET_STARTED") {
+          var mes = "Xin chào bạn đến với MimiShop. Hãy nhập mã mặt hàng để được biết giá.";
+          sendMessage(senderId, mes);
         }
       }
     }
