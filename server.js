@@ -23,6 +23,11 @@ app.get('/webhook', function (req, res) {
   }
   res.send('Error, wrong validation token');
 });
+
+app.get('/setup', function (req, res) {
+  setupGetStartedButton(res)
+});
+
 // Đoạn code xử lý khi có người nhắn tin cho bot
 app.post('/webhook', function (req, res) {
   var entries = req.body.entry;
