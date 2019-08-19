@@ -70,3 +70,32 @@ function sendMessage(senderId, message) {
     }
   });
 }
+
+// setup button GET_STARTED
+function setupGetStartedButton(res) {
+  var messageData = {
+    "get_started": [
+      {
+        "payload": "GET_STARTED"
+      }
+    ]
+  };
+
+  // Start the request
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAMiJkXQAukBAHwfRAeGcR70vpv4CLCr3rfJ8G2y6aOrChp6k3lheSL9nqEnmGlFITKEnk6WOTFsPrVjuZA5F3lJNmNis0EFEJgyiGqHLvfOqUPPSsU17LSd1jLyMAVlhNjcYtQUW7kou6X4hKjwSGTrusoC6WtH1VOzPvA0vU184STvWwnbxdZBUkjJsZD',
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    form: messageData
+  },
+    function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        // Print out the response body
+        res.send(body);
+
+      } else {
+        // TODO: Handle errors
+        res.send(body);
+      }
+    });
+}        
