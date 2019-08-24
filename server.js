@@ -38,16 +38,49 @@ app.post('/webhook', function (req, res) {
       if (message.message) {
         // Nếu người dùng gửi tin nhắn đến
         if (message.message.text) {
+          var text = message.message.text;
+          var upper = text.toUpperCase();
+          var messSend = '';
+          switch (upper) {
+            case 'MK_01':
+              messSend = "Móc khóa có giá: 50k";
+              break;
+            case 'KT_01':
+            case 'KT_02':
+            case 'KT_03':
+            case 'KT_04':
+            case 'KT_05':
+            case 'KT_06':
+            case 'KT_07':
+            case 'KT_08':
+            case 'KT_09':
+            case 'KT_10':
+            case 'KT_11':
+            case 'KT_12':
+            case 'KT_13':
+            case 'KT_14':
+            case 'KT_15':
+            case 'KT_16':
+            case 'KT_17':
+            case 'KT_18':
+            case 'KT_19':
+            case 'KT_20':
+              messSend = "Khuyên tai có giá: 20k";
+              break;
+            default: messSend = '';
+          }
+          if (messSend != '') {
+            sendMessage(senderId, messSend);
+          }
         }
       }
-      else {
-        if (message.postback && message.postback.payload === "GET_STARTED") {
-          var mes = "Xin chào bạn đến với MimiShop. Hãy nhập mã mặt hàng để được biết giá.";
-          sendMessage(senderId, mes);
-        }
+      else if (message.postback && message.postback.payload === "GET_STARTED") {
+        var mes = "Xin chào bạn đến với MimiShop. Hãy nhập mã mặt hàng để được biết giá.";
+        sendMessage(senderId, mes);
       }
     }
   }
+
   res.status(200).send("OK");
 });
 // Gửi thông tin tới REST API để Bot tự trả lời
@@ -55,7 +88,8 @@ function sendMessage(senderId, message) {
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {
-      access_token: "EAAMiJkXQAukBAHwfRAeGcR70vpv4CLCr3rfJ8G2y6aOrChp6k3lheSL9nqEnmGlFITKEnk6WOTFsPrVjuZA5F3lJNmNis0EFEJgyiGqHLvfOqUPPSsU17LSd1jLyMAVlhNjcYtQUW7kou6X4hKjwSGTrusoC6WtH1VOzPvA0vU184STvWwnbxdZBUkjJsZD",
+      access_token: "EAAMiJkXQAukBAFCMT83gqh8bXDThNLeDLfUrsxZCEYIbSIMSll2GurZB8gwpelUTtDHklrwPoUIxspKYs4BCVf5E0bTZA0eHow0ckyH4tRRZAavYyQsWZC2JxrNHUVfWyAehTL5I0ZB7aBbSDsmmIiBYY5BdYaPFjTaucFMoi5Swzyx8CwcFYAKBPUIwjtrMcZD",
+
     },
     method: 'POST',
     json: {
@@ -81,7 +115,7 @@ function setupGetStartedButton(res) {
 
   // Start the request
   request({
-    url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAMiJkXQAukBAHwfRAeGcR70vpv4CLCr3rfJ8G2y6aOrChp6k3lheSL9nqEnmGlFITKEnk6WOTFsPrVjuZA5F3lJNmNis0EFEJgyiGqHLvfOqUPPSsU17LSd1jLyMAVlhNjcYtQUW7kou6X4hKjwSGTrusoC6WtH1VOzPvA0vU184STvWwnbxdZBUkjJsZD',
+    url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAMiJkXQAukBAFCMT83gqh8bXDThNLeDLfUrsxZCEYIbSIMSll2GurZB8gwpelUTtDHklrwPoUIxspKYs4BCVf5E0bTZA0eHow0ckyH4tRRZAavYyQsWZC2JxrNHUVfWyAehTL5I0ZB7aBbSDsmmIiBYY5BdYaPFjTaucFMoi5Swzyx8CwcFYAKBPUIwjtrMcZD',
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     form: messageData
@@ -96,4 +130,13 @@ function setupGetStartedButton(res) {
         res.send(body);
       }
     });
-}        
+}
+
+//EAAMiJkXQAukBAHwfRAeGcR70vpv4CLCr3rfJ8G2y6aOrChp6k3lheSL9nqEnmGlFITKEnk6WOTFsPrVjuZA5F3lJNmNis0EFEJgyiGqHLvfOqUPPSsU17LSd1jLyMAVlhNjcYtQUW7kou6X4hKjwSGTrusoC6WtH1VOzPvA0vU184STvWwnbxdZBUkjJsZD
+//EAAMiJkXQAukBAFCMT83gqh8bXDThNLeDLfUrsxZCEYIbSIMSll2GurZB8gwpelUTtDHklrwPoUIxspKYs4BCVf5E0bTZA0eHow0ckyH4tRRZAavYyQsWZC2JxrNHUVfWyAehTL5I0ZB7aBbSDsmmIiBYY5BdYaPFjTaucFMoi5Swzyx8CwcFYAKBPUIwjtrMcZD
+
+// curl -X POST -H "Content-Type: application/json" -d '{ 
+// "get_started": {
+//   "payload": "GET_STARTED_PAYLOAD"
+// }
+// }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAMiJkXQAukBAHwfRAeGcR70vpv4CLCr3rfJ8G2y6aOrChp6k3lheSL9nqEnmGlFITKEnk6WOTFsPrVjuZA5F3lJNmNis0EFEJgyiGqHLvfOqUPPSsU17LSd1jLyMAVlhNjcYtQUW7kou6X4hKjwSGTrusoC6WtH1VOzPvA0vU184STvWwnbxdZBUkjJsZD"
